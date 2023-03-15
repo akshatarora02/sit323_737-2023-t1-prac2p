@@ -7,21 +7,26 @@ const port = 3000
 app.use(express.json());
 app.use(express.urlencoded());
 
+// User Array
 let users = [
     { id: 1, name: 'ABC'},
     { id: 2, name: 'DEF'},
     { id: 3, name: 'GHI'},
 ];
 
-
+// Landing page
 app.get('/',function(req,res){
     res.send('Hello World')
 })
 
+
+// Display all users in JSON format
 app.get('/users',function(req,res){
     res.json(users)
 })
 
+
+//Display users with a specific ID
 app.get('/users/:id',function(req,res){
     var userID = req.params.id;
     var userFound = false;
@@ -40,6 +45,8 @@ app.get('/users/:id',function(req,res){
 }
 )
 
+
+// Add new users
 app.post('/users', (req, res) => {
 
     if (req.body === undefined) {
@@ -57,6 +64,8 @@ app.post('/users', (req, res) => {
     
   }); 
 
+
+// Update users using ID
 app.put('/users/:id', (req, res) => { 
 
   const userId = parseInt(req.params.id); 
@@ -69,6 +78,7 @@ app.put('/users/:id', (req, res) => {
 }); 
   
 
+// Delete user using ID
 app.delete('/users/:id', (req, res) => { 
   const userId = parseInt(req.params.id);
 
@@ -77,7 +87,7 @@ app.delete('/users/:id', (req, res) => {
   console.log("User with User ID " + userId +" has been deleted")
 }); 
   
-  
+// Start web server  
 app.listen(port, () => {
     console.log("App running at http://localhost:" + port)
 })
